@@ -1,9 +1,7 @@
-package org.company.app
+package org.company.app.network
 
-import com.example.free_univ_app.network.Room
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
-
 
 actual fun fetchRoomCall(callback: (List<Room>) -> Unit) {
     val httpClient = HttpClient(OkHttp) {
