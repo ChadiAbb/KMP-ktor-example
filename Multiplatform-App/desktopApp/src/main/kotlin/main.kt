@@ -7,7 +7,7 @@ import org.company.app.App
 
 fun main() = application {
     Window(
-        title = "Multiplatform App",
+        title = "Free Univ",
         state = rememberWindowState(width = 800.dp, height = 600.dp),
         onCloseRequest = ::exitApplication,
     ) {

@@ -12,17 +12,20 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import multiplatform_app.sharedui.generated.resources.Res
-import multiplatform_app.sharedui.generated.resources.ic_dark_mode
-import multiplatform_app.sharedui.generated.resources.ic_light_mode
-import multiplatform_app.sharedui.generated.resources.open_github
-import multiplatform_app.sharedui.generated.resources.theme
+import free_univ.sharedui.generated.resources.Res
+import free_univ.sharedui.generated.resources.ic_dark_mode
+import free_univ.sharedui.generated.resources.ic_light_mode
+import free_univ.sharedui.generated.resources.open_github
+import free_univ.sharedui.generated.resources.theme
+import free_univ.sharedui.generated.resources.github_black_icon
+import free_univ.sharedui.generated.resources.github_white_icon
 import org.company.app.network.Room
 import org.company.app.network.RoomViewModel
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
 import org.company.app.utilsUI.ExpandableListPreview
 import org.company.app.utilsUI.ToolsBarPreview
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -73,16 +76,6 @@ fun App(
                         .padding(contentPadding)
                         .padding(horizontal = 16.dp)
                 ) {
-                    val uriHandler = LocalUriHandler.current
-                    TextButton(
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                            .align(Alignment.End),
-                        onClick = { uriHandler.openUri("https://github.com/terrakok") },
-                    ) {
-                        Text(stringResource(Res.string.open_github))
-                    }
-
                     var decreasing by remember { mutableStateOf(false) }
                     ToolsBarPreview(
                         modifier = Modifier
@@ -114,7 +107,7 @@ fun App(
                                     Card(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(vertical = 4.dp, horizontal = 8.dp), // Ajoutez un padding horizontal pour éviter de toucher les bords
+                                            .padding(vertical = 4.dp, horizontal = 8.dp),
                                         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                                     ) {
                                         Row(
@@ -146,7 +139,33 @@ fun App(
                         }
                     }
                 }
+            },
+            bottomBar = {
+                BottomAppBar {
+                    val uriHandler = LocalUriHandler.current
+                    var isDark by LocalThemeIsDark.current
+                    val icon = remember(isDark) {
+                        if (isDark) Res.drawable.github_white_icon
+                        else Res.drawable.github_black_icon
+                    }
+
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterEnd
+                    ) {
+                        IconButton(
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            onClick = { uriHandler.openUri("https://github.com/ChadiAbb/free-univ-app") },
+                        ) {
+                            Icon(
+                                painter = painterResource(icon),
+                                contentDescription = stringResource(Res.string.open_github),
+                            )
+                        }
+                    }
+                }
             }
+
         )
     }
 }

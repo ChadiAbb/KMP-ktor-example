@@ -19,7 +19,7 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "Multiplatform App"
+            packageName = "Free Univ"
             packageVersion = "1.0.0"
 
             linux {

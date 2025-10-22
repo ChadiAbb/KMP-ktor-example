@@ -42,7 +42,6 @@ class RoomViewModel {
                         }
                     }
                 }
-                // Tri des éléments
                 elements.forEach { (_, list) ->
                     list.sortBy { if (isDecreasing) -it.freetime else it.freetime }
                 }
